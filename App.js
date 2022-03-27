@@ -17,9 +17,8 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faLock,faCompass } from '@fortawesome/free-solid-svg-icons';
+import { faCompass, faBell, faBookmark, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +29,7 @@ function MyTabs() {
       screenOptions={{
         activeTintColor: '#F60081',
         tabBarStyle: {
-          backgroundColor: '#b3b3b3',
+          backgroundColor: '#ebecf0',
           borderTopColor: 'transparent'
         }
       }}
@@ -38,10 +37,10 @@ function MyTabs() {
       <Tab.Screen
         options={{
           tabBarLabel: ({focused, color, size}) => (
-            <Text style={{color}}>Home</Text>
+            <Text style={{color, fontSize: 10}}>Jelajah</Text>
           ),
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faCompass} size={size} color={color} />
+            <FontAwesomeIcon icon={faCompass} size={20} color={color} />
           ),
           headerShown: false,
         }}
@@ -51,15 +50,41 @@ function MyTabs() {
       <Tab.Screen
         options={{
           tabBarLabel: ({focused, color, size}) => (
-            <Text style={{color}}>Settings</Text>
+            <Text style={{color, fontSize: 10}}>Notifikasi</Text>
           ),
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faLock} size={size} color={color} />
+            <FontAwesomeIcon icon={faBell} size={20} color={color} />
+          ),
+          headerShown: false,
+        }}
+        name="Notification"
+        component={NotificationScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: ({focused, color, size}) => (
+            <Text style={{color, fontSize: 10}}>Pengaturan</Text>
+          ),
+          tabBarIcon: ({color, size}) => (
+            <FontAwesomeIcon icon={faUser} size={20} color={color} />
           ),
           headerShown: false
         }}
         name="Settings"
         component={SettingsScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: ({focused, color, size}) => (
+            <Text style={{color, fontSize: 10}}>Disimpan</Text>
+          ),
+          tabBarIcon: ({color, size}) => (
+            <FontAwesomeIcon icon={faBookmark} size={20} color={color} />
+          ),
+          headerShown: false
+        }}
+        name="Saved"
+        component={SavedScreen}
       />
     </Tab.Navigator>
   );
@@ -77,6 +102,22 @@ function SettingsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={Colors.black}>Settings!</Text>
+    </View>
+  );
+}
+
+function NotificationScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={Colors.black}>Notification!</Text>
+    </View>
+  );
+}
+
+function SavedScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={Colors.black}>Saved!</Text>
     </View>
   );
 }
@@ -206,6 +247,11 @@ function HomeScreen() {
           </View>
         </ScrollView>
       </View>
+
+      <Text style={{fontWeight: '900', fontSize: 24, color: Colors.black, marginLeft: 15, marginTop: -10}}>Populer</Text>
+      <TouchableOpacity>
+        <Image style={{width:'95%', height:'31%', marginLeft:8, backgroundColor: "white", marginTop: 10, borderRadius: 10, marginBottom: 150}} source={require('./img/kaliombo.png')}></Image>
+      </TouchableOpacity>
     </ScrollView>
   </View>
   );
@@ -272,13 +318,13 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: 150,
-    height: 200,
+    height: 230,
     borderRadius: 20,
     marginTop: 20,
     marginRight: 10
   },
   cardImageSm: {
-    width: 150,
+    width: 125,
     height: 100,
     borderRadius: 20,
     marginTop: 20,
